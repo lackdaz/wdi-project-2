@@ -14,8 +14,6 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
     console.log('really, really connected')
 });
-=======
-var port = process.env.PORT || 4000
 
 // mongoose setup
 var dbURI = process.env.PROD_MONGODB || 'mongodb://localhost:27017/mymdb'
