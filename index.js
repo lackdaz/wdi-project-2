@@ -27,10 +27,6 @@ app.use(bodyParser.urlencoded({
 // transform json data to req.body
 app.use(bodyParser.json())
 
-app.get('/', function (req, res) {
-  res.render('')
-})
-
 // setup the ejs template
 app.set('view engine', 'ejs')
 
