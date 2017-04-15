@@ -15,6 +15,7 @@ db.once('open', function () {
   // we're connected!
   console.log('really really connected')
 })
+mongoose.promise = global.Promise
 
 // setup body parser
 var bodyParser = require('body-parser')
@@ -34,9 +35,18 @@ app.set('view engine', 'ejs')
 var methodOverride = require('method-override')
 app.use(methodOverride('_method'))
 
-// require the movies_controller
-var moviesController = require('./controllers/movies_controller')
-app.use(moviesController)
+// require the ejs layouts
+var expressLayout = require('express-ejs-layouts')
+app.use(expressLayout)
+
+// route for forms
+const pagesRouter = require('./routes/pages_router')
+app.use('/', pagesRouter)
+
+// app.use('/login', require('./controllers/auth'))
+
+// middleware
+app.use(express.static('public'))
 
 app.use(function (req, res) {
   res.send('error found')
@@ -45,3 +55,10 @@ app.use(function (req, res) {
 app.listen(port, function () {
   console.log('app is running at ' + port)
 })
+
+// var server
+// if (process.env.NODE_ENV === 'test') {
+//   server = app.listen(process.env.PORT || 4000)
+// } else {
+//   server = app.listen(process.env.PORT || 3000)
+// }
