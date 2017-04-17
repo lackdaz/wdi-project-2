@@ -4,9 +4,20 @@ const userController = require('../controllers/user_controller')
 
 // const todoController = require('../controllers/todo_controller')
 
+function isLoggedIn (req, res, next) {
+ if (req.isAuthenticated()) return next()
+
+ req.flash('flash', {
+   type: 'danger',
+   message: 'You have to log in'
+ })
+ res.redirect('/login')
+}
+
+
 router.route('/')
-.get(function(req,res){
-    res.redirect('/users')
+.get(isLoggedIn,function(req,res){
+    res.redirect('/')
 })
 
 router.route('/users')

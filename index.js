@@ -2,7 +2,9 @@
 var express = require('express')
 var app = express()
 var port = process.env.PORT || 5000
-require('dotenv').config({ silent: true })
+require('dotenv').config({
+  silent: true
+})
 
 
 // mongoose setup
@@ -14,7 +16,7 @@ mongoose.connect(dbURI)
 // check if our connection is okay
 var db = mongoose.connection
 db.on('error', console.error.bind(console, 'connection error:'))
-db.once('open', function () {
+db.once('open', function() {
   // we're connected!
   console.log('really really connected')
 })
@@ -28,32 +30,15 @@ app.use(bodyParser.urlencoded({
 // transform json data to req.body
 app.use(bodyParser.json())
 
-// // setup the session
-// // store the session into mongodb
-// var session = require('express-session')
-// var MongoStore = require('connect-mongo')(session)
-// app.use(session({
-//   secret: process.env.SESSION_SECRET,
-//   resave: false,
-//   saveUninitialized: true,
-//   store: new MongoStore({ url: process.env.MONGODB_URI })
-// }))
-//
-// // setup the flash data
-// var flash = require('connect-flash')
-// app.use(flash())
-
-// Initialising for flash
+// setup the session
+// store the session into mongodb
 var session = require('express-session')
-var MongoStore = require('connect-mongo')(session) // connect-mongo need session
-var flash = require('connect-flash')
-var cookieParser = require('cookie-parser')
-var passport = require('passport')
-
-app.use(cookieParser(process.env.SESSION_SECRET))
+var MongoStore = require('connect-mongo')(session)
 app.use(session({
   secret: process.env.SESSION_SECRET,
-  cookie: { maxAge: 3600000 },
+  cookie: {
+    maxAge: 3600000
+  },
   resave: false,
   saveUninitialized: true,
   store: new MongoStore({
@@ -62,28 +47,61 @@ app.use(session({
   })
 }))
 
+
 // passport comes after session
 // initialise passport into your application
+var passport = require('./config/passport')
 app.use(passport.initialize())
 app.use(passport.session())
-require('./config/passport')(passport)
 
+// Initialising for flash
+var flash = require('connect-flash')
 app.use(flash())
-
-// setup the ejs template
-app.set('view engine', 'ejs')
 
 // setup the method override
 var methodOverride = require('method-override')
 app.use(methodOverride('_method'))
 
+// setup the ejs template
+app.set('view engine', 'ejs')
+
 // require the ejs layouts
 var expressLayout = require('express-ejs-layouts')
 app.use(expressLayout)
 
+// MQTT Initialize
+let Event = require('./models/event')
+var mqtt = require('mqtt')
+var client = mqtt.connect('mqtt://m10.cloudmqtt.com', {
+  port: 11719,
+  username: "oldvydio",
+  password: "EjIAU6OfpIEn",
+  clientId: 'mqttjs_' + Math.random().toString(16).substr(2, 8)
+})
+
+client.on('connect', function() {
+  client.subscribe('outTopic')
+  // client.publish('outTopic', 'Hello mqtt')
+})
+
+client.on('message', function(topic, message) {
+  // message is Buffer
+  let newEvent = new Event({
+    uid: message.toString()
+  })
+  newEvent.save(function(err, savedEntry) {
+    if (err) throw console.error(err)
+    console.log('saved new event!')
+  })
+})
+
+
 /* ------------------
 Routes start here
 -------------------- */
+// middleware
+
+app.use(express.static('public'))
 
 // route for forms
 const pagesRouter = require('./routes/pages_router')
@@ -91,15 +109,11 @@ app.use('/', pagesRouter)
 
 // app.use('/login', require('./controllers/auth'))
 
-
-// middleware
-app.use(express.static('public'))
-
-app.use(function (req, res) {
+app.use(function(req, res) {
   res.send('error found')
 })
 
-app.listen(port, function () {
+app.listen(port, function() {
   console.log('app is running at ' + port)
 })
 
