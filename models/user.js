@@ -50,6 +50,22 @@ userSchema.pre('save', function (next) {
   next()
 })
 
+// setting up static methods
+userSchema.statics.findByEmail = function (givenEmail, next) {
+  this.findOne({
+    email: givenEmail
+  }, function (err, foundUser) {
+    if (err) return next(err)
+
+    next(null, foundUser)
+  })
+}
+
+userSchema.methods.validPassword = function (givenPassword) {
+  var hashedpassword = this.password
+  return bcrypt.compareSync(givenPassword, hashedpassword)
+}
+
 // setting up models
 var User = mongoose.model('User', userSchema)
 

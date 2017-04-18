@@ -11,33 +11,31 @@ router.route('/signup')
 
 router.route('/login')
 .get(userController.login)
+.post(userController.dashboard)
 
-/* Authentication gateway logic */
 router.route('/')
 .get(function(req,res){
     res.render('homepage')
 })
-
 .post(function (req, res) {
-// res.send('post signup')
-console.log('abotu to flash' + res.body)
-if(!req.body.email || !req.body.password ){
-  req.flash('flash',{
-    type: 'error',
-    message: 'Please fill in the fields'
-  })
-  res.redirect('/signup')
-  }
-
-  var signupStrategy = passport.authenticate('local-signup', {
-    successRedirect: '/dashboard',
-    failureRedirect: '/login',
-    failureFlash: 'Invalid username and/or password',
-    successFlash: 'You have logged in'
-  })
-
-  return signupStrategy(req, res)
+  res.send('504')
 })
+
+router.use(isLoggedIn)
+
+router.route('/logout')
+.post(userController.logout)
+.get(userController.logout)
+
+/* Dashboard logic */
+router.route('/dashboard')
+.get(function(req,res){
+    res.render('dashboard')
+})
+.post(function (req, res) {
+  res.redirect('dashboard')
+})
+
 
 
 function isAdmin (req, res, next) {
