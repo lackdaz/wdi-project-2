@@ -20,7 +20,7 @@ router.route('/')
 
 .post(function (req, res) {
 // res.send('post signup')
-console.log(res.body)
+console.log('abotu to flash' + res.body)
 if(!req.body.email || !req.body.password ){
   req.flash('flash',{
     type: 'error',
