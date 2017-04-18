@@ -42,7 +42,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   store: new MongoStore({
-    url: process.env.MONGODB_URI,
+    url: dbURI,
     autoReconnect: true
   })
 }))
