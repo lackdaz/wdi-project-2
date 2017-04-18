@@ -29,7 +29,7 @@ passport.use('local-signup', new LocalStrategy({
     if (foundUser) {
     // return function(err,theNewUser, flashData)
       return done(null, false,
-        req.flash('error','This email is already used'))
+        req.flash('error','Access Denied'))
 
     } else {
     // if not found= new user
