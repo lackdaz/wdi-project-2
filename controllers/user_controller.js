@@ -42,7 +42,7 @@ let usersController = {
         successRedirect: '/login',
         failureRedirect: '/signup',
         failureFlash: 'Invalid username and/or password',
-        successFlash: 'You have logged in'
+        successFlash: 'Account created'
       })
 
       return signupStrategy(req, res)

@@ -36,6 +36,10 @@ router.route('/dashboard')
   res.redirect('dashboard')
 })
 
+router.route('/things')
+.get(function(req,res){
+    res.render('/things')
+})
 
 
 function isAdmin (req, res, next) {

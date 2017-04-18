@@ -1,17 +1,28 @@
-<h1>Form to edit existing movies <%- theMovie.id %></h1>
-
-<form action="/movies/<%- theMovie.id %>?_method=put" method="post">
-  <label for="name">Movie name</label>
-  <input type="text" id="name" name="movies[name]" value="<%- theMovie.name%>">
-
-  <label for="synopsis">Movie synopsis</label>
-  <input type="text" id="synopsis" name="movies[synopsis]" value="<%- theMovie.synopsis%>">
-
-  <label for="rating">Movie rating</label>
-  <input type="tel" id="rating" name="movies[rating]" value="<%- theMovie.rating%>">
-
-  <button type="submit">Update</button>
-</form>
-<form action="/movies/<%- theMovie.id %>?_method=delete" method="post">
-  <button type="submit">Delete</button>
-</form>
+<% include ../partials/header_product %>
+    <section class="section green">
+        <div class="container">
+          <h1 class="page-header">Edit Product</h1>
+            <div class="row">
+              <div class="span5">
+                <form action=<%="/product/" + product.id + "?_method=PUT" %> method="POST">
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" name="title" class="form-control" id="titleInput" value="<%= product.title %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="descriptionInput" rows="3" placeholder="Description" name="description"><%= product.description %></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="imageUrl">Product Image URL</label>
+                        <textarea class="form-control" id="imageUrlInput" rows="3" placeholder="Description" name="imageUrl"><%= product.imageUrl %></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+              </div>
+              <div class="span5">
+                <a href=<%="/product/" + product._id + "/edit" %>><img src="<%= product.imageUrl %>" class="product-image" alt="<%= product.title %>"></a>
+              </div>
+            </div>
+        </div>
+    </section>

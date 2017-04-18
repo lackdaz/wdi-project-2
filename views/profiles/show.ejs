@@ -1,0 +1,17 @@
+<h1>Form to edit existing movies <%- theMovie.id %></h1>
+
+<form action="/movies/<%- theMovie.id %>?_method=put" method="post">
+  <label for="name">Movie name</label>
+  <input type="text" id="name" name="movies[name]" value="<%- theMovie.name%>">
+
+  <label for="synopsis">Movie synopsis</label>
+  <input type="text" id="synopsis" name="movies[synopsis]" value="<%- theMovie.synopsis%>">
+
+  <label for="rating">Movie rating</label>
+  <input type="tel" id="rating" name="movies[rating]" value="<%- theMovie.rating%>">
+
+  <button type="submit">Update</button>
+</form>
+<form action="/movies/<%- theMovie.id %>?_method=delete" method="post">
+  <button type="submit">Delete</button>
+</form>

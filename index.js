@@ -75,8 +75,7 @@ app.set('view engine', 'ejs')
 var expressLayout = require('express-ejs-layouts')
 app.use(expressLayout)
 
-// MQTT Initialize
-let Event = require('./models/event')
+
 var mqtt = require('mqtt')
 var client = mqtt.connect('mqtt://m10.cloudmqtt.com', {
   port: 11719,
@@ -85,23 +84,8 @@ var client = mqtt.connect('mqtt://m10.cloudmqtt.com', {
   clientId: 'mqttjs_' + Math.random().toString(16).substr(2, 8)
 })
 
-client.on('connect', function() {
-  client.subscribe('outTopic')
-  // client.publish('outTopic', 'Hello mqtt')
-})
-
-client.on('message', function(topic, message) {
-  // message is Buffer
-  let newEvent = new Event({
-    uid: message.toString()
-  })
-  newEvent.save(function(err, savedEntry) {
-    if (err) throw console.error(err)
-    console.log('saved new event!')
-  })
-})
-
-
+// route for websocket
+require('./controllers/MQTT_controller')(mqtt)
 /* ------------------
 Routes start here
 -------------------- */
@@ -118,6 +102,8 @@ app.use('/', pagesRouter)
 app.use(function(req, res) {
   res.send('error found')
 })
+
+// start the server listening for connections by client sockets
 
 app.listen(port, function() {
   console.log('app is running at ' + port)

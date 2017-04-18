@@ -3,21 +3,21 @@ let User = require('../models/user')
 let User = require('../models/user')
 
 
-let deviceController = {
+let thing = {
 
   list: (req, res, next) => {
-    Device.find({})
+    Thing.find({})
     .populate('productId')
     .populate('customerId')
     .exec(
      (err, output) => {
        if (err) next(err)
-       res.render('device/', { devices: output })
+       res.render('things/', { things: output })
      })
   },
 
   new: (req, res) => {
-    Product.find({},
+    Thing.find({},
       (err, output2) => {
         if (err) throw err
 
@@ -38,14 +38,14 @@ let deviceController = {
   },
 
   create: (req, res) => {
-    let newDevice = new Device({
+    let newThing = new Thing({
       deviceId: req.body.deviceId,
       imageUrl: req.body.imageUrl,
       productId: req.body.productId,
       customerId: req.body.customerId
     })
 
-    newDevice.save((err, savedEntry) => {
+    newThing.save((err, savedEntry) => {
       if (err) throw err
       res.redirect('/device')
     }
@@ -53,7 +53,7 @@ let deviceController = {
   },
 
   show: (req, res) => {
-    Device.findById(req.params.id)
+    Thing.findById(req.params.id)
     .populate('productId')
     .populate('customerId')
     .exec(
@@ -69,7 +69,7 @@ let deviceController = {
   },
 
   edit: (req, res) => {
-    Product.find({},
+    Thing.find({},
       (err, output2) => {
         if (err) throw err
 
@@ -83,7 +83,7 @@ let deviceController = {
 
             if (err) throw err
 
-            Device.findById(req.params.id)
+            Thing.findById(req.params.id)
             .populate('productId')
             .populate('customerId')
             .exec(
@@ -102,7 +102,7 @@ let deviceController = {
   },
 
   update: (req, res) => {
-    Device.findOneAndUpdate({
+    Thing.findOneAndUpdate({
       _id: req.params.id
     }, {
       deviceId: req.body.deviceId,
@@ -116,7 +116,7 @@ let deviceController = {
   },
 
   delete: (req, res) => {
-    Device.findByIdAndRemove(req.params.id, (err, output) => {
+    Thing.findByIdAndRemove(req.params.id, (err, output) => {
       if (err) throw err
       res.redirect('/device')
     })
