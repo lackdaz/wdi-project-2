@@ -57,6 +57,12 @@ app.use(passport.session())
 // Initialising for flash
 var flash = require('connect-flash')
 app.use(flash())
+app.use(function(req, res, next) {
+  // before every route, attach the flash messages and current user to res.locals
+  res.locals.alerts = req.flash();
+  res.locals.currentUser = req.user;
+  next();
+});
 
 // setup the method override
 var methodOverride = require('method-override')

@@ -25,7 +25,7 @@ module.exports = function (passport) {
       if (!foundUser) {
         return next(err, false,
         req.flash('flash', {
-          type: 'danger',
+          type: 'error',
           message: 'No user found'
         })
       )
@@ -35,7 +35,7 @@ module.exports = function (passport) {
       if (!foundUser.validPassword(givenPassword)) {
         return next(null, false,
         req.flash('flash', {
-          type: 'danger',
+          type: 'error',
           message: 'Access Denied'
         }))
       }
@@ -56,7 +56,7 @@ module.exports = function (passport) {
         // return function(err,theNewUser, flashData)
         return done(null, false,
           req.flash('flash', {
-            type: 'danger',
+            type: 'error',
             message: 'This email is already used'
           }))
       } else {

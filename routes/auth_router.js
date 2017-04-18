@@ -7,7 +7,7 @@ function isLoggedIn (req, res, next) {
  if (!req.isAuthenticated()) return next()
 
  req.flash('flash', {
-   type: 'danger',
+   type: 'error',
    message: 'You have logged in'
  })
  res.redirect('/')
@@ -30,7 +30,7 @@ Router.post('/signup',isLoggedIn, function (req, res) {
 // res.send('post signup')
 if(!req.body.email || !req.body.password ){
   req.flash('flash',{
-    type: 'danger',
+    type: 'error',
     message: 'Please fill in the fields'
   })
   res.redirect('/signup')
@@ -49,7 +49,7 @@ if(!req.body.email || !req.body.password ){
 Router.post('/login',isLoggedIn, function (req, res) {
   if(!req.body.email || !req.body.password ){
     req.flash('flash',{
-      type: 'danger',
+      type: 'error',
       message: 'Please fill in the fields'
     })
     res.redirect('/login')

@@ -8,7 +8,7 @@ var userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: true,
+    unique: [true, 'This email is already taken!'],
     lowercase: true,
     match: emailRegex
   },
@@ -23,8 +23,11 @@ var userSchema = new mongoose.Schema({
     // required: true,
     // minlength: [8, 'Name must be between 3 and 99 characters'],
     // maxlength: [99, 'Name must be between 3 and 99 characters']
+  },
+  isAdmin: Boolean,
+  things: []
   }
-})
+)
 
 // Password encryption
 var bcrypt = require('bcrypt')

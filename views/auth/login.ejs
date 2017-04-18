@@ -1,13 +1,16 @@
-<form action="/signup" method="POST">
-  <div class="form-group">
-    <label for="authEmail">Email</label>
-    <input id="authEmail" class="form-control" type="email" name="email">
-  </div>
+<h1>Login Page</h1>
 
-  <div class="form-group">
-    <label for="authPassword">Password</label>
-    <input id="authPassword" class="form-control" type="password" name="password">
-  </div>
+<form class="partials-form" action="/login" method="POST">
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" name="email" placeholder="email">
+    </div>
 
-  <input class="btn btn-primary" type="submit">
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" placeholder="password">
+    </div>
+
+    <input class="button" type="submit" value="Log In">
 </form>
+<a href="/signup">Sign Up</a>

@@ -8,10 +8,16 @@ let usersController = {
     })
   },
 
+// this is a get request
   new: (req, res) => {
-    res.render('users/signup')
+    res.render('auth/signup')
   },
 
+  login: (req, res) => {
+    res.render('auth/login')
+  },
+
+// this is a post request
   create: (req,res) => {
     console.log(req.body)
     let newUser = new User({
@@ -21,27 +27,11 @@ let usersController = {
     })
     newUser.save(function (err, output) {
       if (err) throw err
-      res.redirect('/todo')
+      console.log('redirecting to login page')
+      res.redirect('/login')
     })
   }
 }
-
-// router.route('/register')
-// .get(function(req, res) {
-// })
-
-// .post(function(req, res) {
-//   // create using User method
-//   var newUser = new User({
-//     email: req.body.email,
-//     name: req.body.name,
-//     password: req.body.password
-//   })
-//   newUser.save(function(err,data){
-//     if (err) return res.redirect('/register')
-//     res.redirect('/')
-//   })
-// });
 
 
 module.exports = usersController

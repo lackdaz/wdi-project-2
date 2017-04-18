@@ -1,6 +1,7 @@
-let Device = require('../models/device')
-let Product = require('../models/product')
-let Customer = require('../models/customer')
+let Thing = require('../models/thing')
+let User = require('../models/user')
+let User = require('../models/user')
+
 
 let deviceController = {
 
