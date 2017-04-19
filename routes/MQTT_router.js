@@ -1,20 +1,12 @@
-// MQTT Initialize
-let Event = require('./models/event')
+const express = require('express')
+const router = express.Router()
+const mqtt = require('../controllers/MQTT_controller')
 
+/* Authentication start here */
+router.route('/open')
+.get(mqtt.open)
 
-client.on('connect', function() {
-  client.subscribe('outTopic')
-  console.log('connected to MQTT!')
-  // client.publish('outTopic', 'Hello mqtt')
-})
+router.route('/access')
+.post(mqtt.accessPrivileges)
 
-client.on('message', function(topic, message) {
-  // message is Buffer
-  let newEvent = new Event({
-    uid: message.toString()
-  })
-  newEvent.save(function(err, savedEntry) {
-    if (err) throw console.error(err)
-    console.log('saved new event!')
-  })
-})
+module.exports = router

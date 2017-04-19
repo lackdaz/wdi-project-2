@@ -9,6 +9,10 @@ var eventSchema = new mongoose.Schema({
     type : Date,
     default : Date.now
   },
+  isEntry: {
+    type: Boolean,
+    default: false
+  }
   // productId: [{type: mongoose.SChema.Types.ObjectId, ref:'Product'}],
   // profileId: [{type: mongoose.SChema.Types.ObjectId, ref:'Profile'}],
 })

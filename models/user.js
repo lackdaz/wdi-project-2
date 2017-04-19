@@ -25,7 +25,7 @@ var userSchema = new mongoose.Schema({
     // maxlength: [99, 'Name must be between 3 and 99 characters']
   },
   isAdmin: Boolean,
-  things: []
+  cardUid: String
   }
 )
 

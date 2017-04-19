@@ -5,7 +5,7 @@ var port = process.env.PORT || 5000
 require('dotenv').config({
   silent: true
 })
-
+app.use(express.static('public'))
 
 // mongoose setup
 var dbURI = process.env.PROD_MONGODB || 'mongodb://localhost:27017/unit2'
@@ -61,6 +61,8 @@ app.use(function(req, res, next) {
   // before every route, attach the flash messages and current user to res.locals
   res.locals.alerts = req.flash();
   res.locals.currentUser = req.user;
+  res.locals.authenticated =  req.isAuthenticated()
+  // res.locals.isAdmin = req.isAdmin()
   next();
 });
 
@@ -77,30 +79,28 @@ app.use(expressLayout)
 
 
 var mqtt = require('mqtt')
-var client = mqtt.connect('mqtt://m10.cloudmqtt.com', {
-  port: 11719,
-  username: "oldvydio",
-  password: "EjIAU6OfpIEn",
-  clientId: 'mqttjs_' + Math.random().toString(16).substr(2, 8)
-})
 
 // route for websocket
-require('./controllers/MQTT_controller')(mqtt)
+require('./controllers/MQTT_server')(mqtt)
+
 /* ------------------
 Routes start here
 -------------------- */
 // middleware
 
-app.use(express.static('public'))
 
 // route for forms
 const pagesRouter = require('./routes/pages_router')
 app.use('/', pagesRouter)
 
+// route for web sockets
+const mqttRouter = require('./routes/MQTT_router')
+app.use('/mqtt', mqttRouter)
+
 // app.use('/login', require('./controllers/auth'))
 
 app.use(function(req, res) {
-  res.send('error found')
+  res.render('404')
 })
 
 // start the server listening for connections by client sockets

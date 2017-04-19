@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const userController = require('../controllers/user_controller')
+const thingController = require('../controllers/thing_controller')
 
-// const todoController = require('../controllers/todo_controller')
 
 /* Authentication start here */
 router.route('/signup')
@@ -36,22 +36,23 @@ router.route('/dashboard')
   res.redirect('dashboard')
 })
 
+// // Routes for things
 router.route('/things')
-.get(function(req,res){
-    res.render('/things')
-})
+.get(thingController.list)
+.post(thingController.create)
+
+router.route('/things/new')
+.get(thingController.new)
+
+router.route('/:id')
+.delete(thingController.delete)
+.get(thingController.show)
+.put(thingController.update)
+
+router.route('/:id/edit')
+.get(thingController.edit)
 
 
-function isAdmin (req, res, next) {
-  if (req.user.isAdmin === true) return next()
-  console.log("failed authentication")
-
-  req.flash('flash', {
-    type: 'error',
-    message: 'You have to log in'
-  })
-  res.send('Error! You do not have access privileges')
-}
 
 
 function isLoggedIn (req, res, next) {

@@ -7,17 +7,19 @@
   <body>
 
     <h1>DASHBOARD</h1>
-    <h2>Observe. Control. Automate</h2>
+    <%- include('./partials/flash') %>
     <a href="/signup">Signup</a>
     <a href="/login">Login</a>
     <a href="/logout">Logout</a>
 
-    <div class="container-fluid">
+    <%- include('./partials/navbar') %>
+
+    <%# <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="/things">Yours Things</a></li>
+            <li class="active"><a href="/event">Overview <span class="sr-only">(current)</span></a></li>
+            <li><a href="/things">Your Things</a></li>
             <li><a href="/observe">Observe</a></li>
             <li><a href="/control">Control</a></li>
             <li><a href="/automate">Automate</a></li>
@@ -26,7 +28,9 @@
             <li><a href="">Settings</a></li>
           </ul>
         </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main " id="myDashboard"></div>
+      </div>
+    </div>%>
   </body>
   <!-- Bootstrap core JavaScript
   ================================================== -->
