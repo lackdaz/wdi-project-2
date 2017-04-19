@@ -18,20 +18,6 @@ let mqttController = {
 
   open: (req, res) => {
 
-},
-  accessPrivileges: (req, res) => {
-    // listen to next message and save it with privileges
-    client.on('message', function(topic, message) {
-      // message is Buffer
-      let newEvent = new Event({
-        uid: message.toString()
-      })
-      // client.end()
-      newEvent.save(function(err, savedEntry) {
-        if (err) throw console.error(err)
-        console.log('saved new event!')
-      })
-    })
 }
 }
 module.exports = mqttController
