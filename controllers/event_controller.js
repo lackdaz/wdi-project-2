@@ -3,8 +3,7 @@ let Product = require('../models/product')
 let productController = {
 
   list: (req, res) => {
-    Product.find({}, (err, output) => {
-      if (err) throw err
+t      if (err) throw err
       res.render('product/index', { products: output })
     })
   },

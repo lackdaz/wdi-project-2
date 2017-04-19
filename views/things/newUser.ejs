@@ -1,0 +1,24 @@
+<% include ../partials/header_things %>
+<%- include('../partials/flash') %>
+    <section class="section green">
+        <div class="container">
+            <div class="row">
+                <div class="span8">
+                    <h1 class="page-header">New User</h1>
+                    <form action="/things/user" method="POST">
+                        <div class="form-group">
+                            <label for="name ">Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="What would you like to call your user" name="name">
+                            <label for="name">Card Uid</label>
+                            <input type="text" class="form-control" id="name" placeholder="What is your card UID?" name="cardUid">
+                            <label for="email">Email</label>
+                            <input type="text" class="form-control" id="email" placeholder="Email" name="email">
+                            <label for="related"></label>
+                            <input type="hidden" class="form-control" id="related" placeholder="" name="related" value="<%= currentUser._id %>">
+
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>

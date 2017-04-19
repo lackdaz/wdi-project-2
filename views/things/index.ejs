@@ -1,29 +1,39 @@
 <% include ../partials/header_things %>
-<section class="section green">
-    <div class="container">
-        <div class="row flex-it">
-                <% things.forEach(function (thing) { %>
-                  <div class="span6">
-                  <div class="row">
-                      <div class="span3">
-                      <p><strong>Thing Name: </strong>
-                          <%= thing.name %>
-                      </p>
-                      <p><strong>Users : </strong>
-                          <%= thing.userId.reduce(function(acc,val){
+    <%- include('../partials/navbar') %>
+
+        <section class="section green">
+            <div class="container">
+                <div class="row flex-it">
+                    <% things.forEach(function (thing) { %>
+                        <div class="span6">
+                            <div class="row">
+                                <div class="span3">
+                                    <p><strong>Thing Name: </strong>
+                                        <%= thing.name %>
+                                    </p>
+                                    <p><strong>Owner : </strong>
+                                        <%= thing.owner.name %>
+                                    </p>
+                                    <p><strong>Users : </strong>
+                                        <%= thing.userId.reduce(function(acc,val){
                             acc+= " " + val.name
                             return acc
                           },"") %>
-                      </p>
-                      <a href="<%="/things/" + thing._id %>"><button class="btn btn-info"><i class="icon-eye-open"></i>View</button></a>
+                                    </p>
+                                    <a href="<%="/things/"+ thing._id%>"><button class="btn btn-info"><i class="icon-eye-open"></i>View</button></a>
 
-                      <a href="<%="/things/" + thing._id + "/edit" %>"<button class="btn btn-primary"><i class="icon-pencil"></i>Edit</button></a>
+                                    <a href="<%="/things/"+thing._id+"/edit" %>"><button class="btn btn-primary"><i class="icon-pencil"></i>Edit</button></a>
 
-                      </div>
-                    </div>
-                    </div>
-                    <% }) %>
-              <a href="/things/new">New Thing</a>
-        </div>
-    </div>
-</section>
+                                    <form method="POST" action="/things/<%=thing.id%>?_method=DELETE">
+                                        <button class="btn btn-danger" type="submit">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %>
+                            <a href="/things/new">New Thing</a>
+                            <a href="/things/user/new">New User</a>
+
+                </div>
+            </div>
+        </section>

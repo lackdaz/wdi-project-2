@@ -2,11 +2,14 @@
 let Event = require('../models/event')
 var mqtt = require('mqtt')
 var Thing = require('../models/thing')
+require('dotenv').config({
+  silent: true
+})
 
 var client = mqtt.connect('mqtt://m10.cloudmqtt.com', {
   port: 11719,
-  username: "oldvydio",
-  password: "EjIAU6OfpIEn",
+  username: process.env.MQTT_USERNAME,
+  password: process.env.MQTT_PASSWORD,
   clientId: 'mqttjs_' + Math.random().toString(16).substr(2, 8)
 })
 
@@ -24,21 +27,31 @@ client.on('connect', function() {
 
 client.on('message', function(topic, message) {
   // message is Buffer
-
-  Thing.find({}).populate('userId').exec((err,output) => {
+  var sortedMessage = message.toString()
+  console.log('message is' + sortedMessage)
+  Thing.find({},'userId').populate('userId').exec((err,output) => {
     if (err) throw console.error(err);
-    if (output[0].cardUid.includes(message.toString())) {
-      var access = true
-      // and open the door
-      client.publish('outTopic', '1')
+    var access = false
+    // console.log(output)
+    for (var i = 0; i < output.length; i++) {
+      for (var j = 0; j < output[i].userId.length; j++) {
+        // console.log(output[i].userId[j].cardUid)
+        if (output[i].userId[j].cardUid === sortedMessage) {
+          access = true
+          // and open the door
+          client.publish('onOff', '1')
+          break
+      }
+
+
+      }
     }
-    else access = false
-    
-    let newEvent = new Event({
-      uid: message.toString(),
-      isEntry: access
-    })
-    // client.end()
+    console.log(access)
+      let newEvent = new Event({
+        uid: message.toString(),
+        isEntry: access
+      })
+      // client.end()
     newEvent.save(function(err, savedEntry) {
       if (err) throw console.error(err)
       console.log('saved new event!')

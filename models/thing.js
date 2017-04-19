@@ -6,10 +6,13 @@ let thingSchema = new mongoose.Schema({
     required: true,
   },
   thingId: {
-    type: String,
+    type: String
   },
   userId: [{type: mongoose.Schema.Types.ObjectId, ref:'User'}]
-})
+  ,
+  owner: {type: mongoose.Schema.Types.ObjectId, ref:'User'}
+  }
+)
 
 let Thing = mongoose.model('Thing', thingSchema)
 

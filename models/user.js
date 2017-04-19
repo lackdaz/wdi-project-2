@@ -7,14 +7,12 @@ var emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
 var userSchema = new mongoose.Schema({
   email: {
     type: String,
-    required: true,
     unique: [true, 'This email is already taken!'],
     lowercase: true,
     match: emailRegex
   },
   name: {
     type: String,
-    required: true,
     minlength: [3, 'Name must be between 3 and 99 characters'],
     maxlength: [99, 'Name must be between 3 and 99 characters']
   },
@@ -25,7 +23,8 @@ var userSchema = new mongoose.Schema({
     // maxlength: [99, 'Name must be between 3 and 99 characters']
   },
   isAdmin: Boolean,
-  cardUid: String
+  cardUid: String,
+  related: String
   }
 )
 

@@ -8,10 +8,13 @@
                     <form action="/things" method="POST">
                         <div class="form-group">
                             <label for="deviceId">Thing ID</label>
-                            <input type="text" class="form-control" id="deviceIdInput" placeholder="deviceId" name="deviceId">
+                            <input type="text" class="form-control" id="deviceIdInput" placeholder="What is your device id?" name="thingId">
                             <label for="name">Name</label>
                             <input type="text" class="form-control" id="name" placeholder="" name="name">
-                            <label for="name">userId</label>
+                            <label for="owner"></label>
+                            <input type="hidden" class="form-control" id="owner" placeholder="" name="owner" value="<%= currentUser._id %>">
+
+                            <label for="name">Users</label>
 
                         <% users.forEach(function (output) {%>
                             <div class="checkbox">

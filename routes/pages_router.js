@@ -44,13 +44,19 @@ router.route('/things')
 router.route('/things/new')
 .get(thingController.new)
 
-router.route('/:id')
+router.route('/things/:id')
 .delete(thingController.delete)
 .get(thingController.show)
 .put(thingController.update)
 
-router.route('/:id/edit')
+router.route('/things/:id/edit')
 .get(thingController.edit)
+
+router.route('/things/user')
+.post(thingController.createUser)
+
+router.route('/things/user/new')
+.get(thingController.newUser)
 
 
 
