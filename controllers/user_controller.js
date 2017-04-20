@@ -22,7 +22,7 @@ let usersController = {
   login: (req, res) => {
     // var myflash = req.flash('test')
     // console.log(myflash + '== my flash')
-    res.render('auth/login', {
+    res.render('auth/login', {  
       // flashView : myflash,
       // flashview2 : req.flash('test2')
     })

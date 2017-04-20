@@ -1,0 +1,51 @@
+<%- include('../partials/declarations') %>
+
+
+    <% include ../partials/header_things %>
+        <%- include('../partials/navbar') %>
+
+            <div class="content-wrapper py-3">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-xl-3 col-sm-6 mb-3">
+
+                                <% things.forEach(function (thing) { %>
+                                    <div class="span6">
+                                        <div class="row">
+                                            <div class="span3">
+                                                <p><strong>Thing Name: </strong>
+                                                    <%= thing.name %>
+                                                </p>
+                                                <p><strong>Owner : </strong>
+                                                    <%= thing.owner.name %>
+                                                </p>
+                                                <p><strong>Users : </strong>
+                                                    <%= thing.userId.reduce(function(acc,val){
+                            acc+= " " + val.name
+                            return acc
+                          },"") %>
+                                                </p>
+                                                <a href="<%=" /things/ "+ thing._id%>"><button class="btn btn-info"><i class="icon-eye-open"></i>View</button></a>
+
+                                                <a href="<%=" /things/ "+thing._id+"/edit " %>"><button class="btn btn-primary"><i class="icon-pencil"></i>Edit</button></a>
+
+                                                <form method="POST" action="/things/<%=thing.id%>?_method=DELETE">
+                                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% }) %>
+                                        <a href="/things/new">New Thing</a>
+                                        <a href="/things/user/new">New User</a>
+
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    </section>
+                </div>
+              </div>
+            </div>
+          </div>

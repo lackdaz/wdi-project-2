@@ -1,18 +1,40 @@
-<h1>Login Page</h1>
+<!-- Submit Start
+    ======================================================== -->
+    <%- include('../partials/mainheader') %>
+    <%- include('../partials/flash') %>
 
-<%- include('../partials/flash') %>
+<section id="submit-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="block">
+                    <div class="submit-contant">
+                        <div class="submit-header">
+                            <%# <i class="fa fa-envelope-o"></i>%>
+                            <h3>Login to Thingies</h3>
+                        </div>
+                        <div class="col-md-6 col-md-offset-3">
+                              <form class="partials-form" action="/login" method="POST">
+                                  <div class="form-group">
+                                      <input type="email" name="email" placeholder="Email">
+                                  </div>
 
-<form class="partials-form" action="/login" method="POST">
-    <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" name="email" placeholder="email" value="">
+                                  <div class="form-group">
+                                      <input type="password" name="password" placeholder="Password">
+                                  </div>
+
+                                  <input class="btn btn-lg btn-success" type="submit" value="Log In">
+                                  </form>
+                              <div class="text-center"><a href="/signup">Sign Up</a></div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- .col-md-12 -->
+        </div>
+        <!-- .row close -->
     </div>
-
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" name="password" placeholder="password" value-"">
-    </div>
-
-    <input class="button" type="submit" value="Log In">
-</form>
-<a href="/signup">Sign Up</a>
+    <!-- .container close -->
+</section>
+<!-- #submit close -->
