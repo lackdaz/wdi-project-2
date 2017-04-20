@@ -23,6 +23,7 @@ let thing = {
         if (err) throw err
         console.log(output)
         res.render('things/new', {
+          layout: 'layout',
           users: output,
         })
       })

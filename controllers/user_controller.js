@@ -12,7 +12,7 @@ let usersController = {
 
 // this is a get request
   new: (req, res) => {
-    res.render('auth/signup', {
+    res.render('auth/signup', {  layout: 'portal'
       // flashView: '',
       // flashview2: ''
     }
@@ -22,7 +22,7 @@ let usersController = {
   login: (req, res) => {
     // var myflash = req.flash('test')
     // console.log(myflash + '== my flash')
-    res.render('auth/login', {  
+    res.render('auth/login', {  layout: 'portal'
       // flashView : myflash,
       // flashview2 : req.flash('test2')
     })

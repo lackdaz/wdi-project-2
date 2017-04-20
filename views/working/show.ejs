@@ -1,0 +1,26 @@
+<% include ../partials/navbar %>
+    <section class="section green">
+        <div class="container">
+          <h2>Thing Name: <%=thing.name%></h2>
+            <div class="row">
+              <div class="span5">
+                <p><strong>Thing id: </strong>
+                    <%= thing.id %>
+                </p>
+                <p><strong>Users: </strong>
+                  <ul>
+                    <% thing.userId.forEach(function(output){ %>
+                      <li> <a href=<%="/users/" + output._id + "/edit" %>><%= output.name -%></a></li>
+                  <% }) %>
+                </ul>
+                </p>
+                <a href=<%="/things/" + thing._id + "/edit" %> class="pull-left"><button class="btn btn-primary"><i class="icon-pencil"></i>Edit</button></a>
+
+                <form class="deleteForm pull-right" method="POST" action=<%="/thing/" + thing._id + "?_method=DELETE" %>>
+                <p class="pull-right"><button type="submit" class="btn btn-danger"><i class="icon-trash"></i>Delete</button></p>
+                </form>
+              </div>
+
+            </div>
+        </div>
+    </section>
