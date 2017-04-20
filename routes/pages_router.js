@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const userController = require('../controllers/user_controller')
 const thingController = require('../controllers/thing_controller')
+const eventController = require('../controllers/event_controller')
 
 
 /* Authentication start here */
@@ -15,7 +16,8 @@ router.route('/login')
 
 router.route('/')
 .get(function(req,res){
-    res.render('homepage')
+    // res.render('homepage')
+    res.render('homepage', {layout: 'homepage'})
 })
 .post(function (req, res) {
   res.send('504')
@@ -64,11 +66,17 @@ router.route('/settings')
 router.route('/settings/:id')
 .put(userController.update)
 
+router.route('/users')
+.get(userController.list)
+
 router.route('/users/:id/edit')
 .get(userController.editChild)
 
 router.route('/users/:id/')
 .put(userController.updateChild)
+
+router.route('/events')
+.get(eventController.list)
 
 function isLoggedIn (req, res, next) {
  if (req.isAuthenticated()) return next()

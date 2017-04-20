@@ -1,9 +1,14 @@
-let Product = require('../models/product')
+let Event = require('../models/event')
 
-let productController = {
+let eventController = {
 
   list: (req, res) => {
-
+    Event.find({}, function(err,output){
+      if (err) next(err)
+      res.render('events/', {
+        events: output
+      })
+    })
   },
 
   new: (req, res) => {
@@ -11,58 +16,28 @@ let productController = {
   },
 
   create: (req, res) => {
-    // let deviceId = req.params.id
-    // console.log(deviceId);
-    // res.send(deviceId)
-
-    let newProduct = new Product({
-      title: req.body.title,
-      description: req.body.description,
-      imageUrl: req.body.imageUrl
-    })
-    newProduct.save(function (err, savedEntry) {
-      if (err) throw err
-        res.redirect('/product')
-    })
-
   },
 
   show: (req, res) => {
-    Product.findById(req.params.id, (err, output) => {
-      if (err) throw err
-      res.render('product/show', { product: output })
-    })
+
   },
 
 
   edit: (req, res) => {
-    Product.findById(req.params.id, (err, output) => {
-      if (err) throw err
-      res.render('product/edit', { product: output })
-    })
+
   },
 
   update: (req, res) => {
-    Product.findOneAndUpdate({
-      _id: req.params.id
-    }, {
-      title: req.body.title,
-      description: req.body.description,
-      imageUrl: req.body.imageUrl
-      //john
-    }, (err, product) => {
-      if (err) throw err
-      res.redirect('/product/' + product.id)
-    })
+
   },
 
   delete: (req, res) => {
-    Product.findByIdAndRemove(req.params.id, (err, product) => {
+    event.findByIdAndRemove(req.params.id, (err, event) => {
       if (err) throw err
-      res.redirect('/product')
+      res.redirect('/event')
     })
   }
 
 }
 
-module.exports = productController
+module.exports = eventController

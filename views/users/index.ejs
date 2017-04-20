@@ -1,0 +1,54 @@
+<!-- Example Tables Card -->
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fa fa-table"></i> Users
+    </div>
+    <div class="card-block">
+        <div class="table-responsive">
+            <table class="table table-bordered" width="100%" id="dataTable" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>card UID</th>
+                        <th>Home?</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                      <th>#</th>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>card UID</th>
+                      <th>Home?</th>
+                </tfoot>
+                <tbody>
+                <% users.forEach(function(user,index){ %>
+                    <tr>
+                      <td>
+                        <%- index+1 %>
+                      </td>
+                      <td>
+                        <%- user.name %>
+                      </td>
+                      <td>
+                        <%- user.email %>
+                      </td>
+                      <td>
+                        <%- user.cardUid %>
+                      </td>
+                      <td>
+                        Maybe
+                      </td>
+                    </tr>
+                <% }) %>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer small text-muted">
+        Last updated <%= users.pop().time %>
+    </div>
+</div>

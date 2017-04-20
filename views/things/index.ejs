@@ -1,41 +1,41 @@
 <div class="row">
-  <% things.forEach(function (thing) { %>
+    <% things.forEach(function (thing) { %>
 
-    <div class="col-xl-3 col-sm-6 mb-3">
-    <div class="card card-inverse card-primary o-hidden h-100">
-    <div class="card-block">
-    <div class="card-block-icon">
-    <i class="fa fa-fw fa-comments"></i>
-    </div>
-    <div class="mr-5">
-    <p><strong>Thing Name: </strong>
-    <%= thing.name %>
+        <div class="col-xl-3 col-sm-6 mb-3">
+            <div class="card card-inverse card-primary o-hidden h-100">
+                <div class="card-block">
+                    <div class="card-block-icon">
+                        <i class="fa fa-fw fa-comments"></i>
+                    </div>
+                    <div class="mr-5">
+                        <p><strong>Thing Name: </strong>
+                            <%= thing.name %>
 
-    </p>
-    <p><strong>Owner : </strong>
-    <%= thing.owner.name %>
-    </p>
-    <p><strong>Users : </strong>
-    <%= thing.userId.reduce(function(acc,val){
+                        </p>
+                        <p><strong>Owner : </strong>
+                            <%= thing.owner.name %>
+                        </p>
+                        <p><strong>Users : </strong>
+                            <%= thing.userId.reduce(function(acc,val){
       acc+= " " + val.name
       return acc
     },"") %>
-    </div>
-    </div>
-    <a href="<%="/things/"+thing._id%>" class="card-footer clearfix small z-1">
-    <span class="float-left">View</span>
-    <span class="float-right"><i class="fa fa-angle-right"></i></span>
-    </a>
-    <a href="<%="/things/"+thing._id+"/edit"%>" class="card-footer clearfix small z-1">
-    <span class="float-left">Edit</span>
-    <span class="float-right"><i class="fa fa-angle-right"></i></span>
-    </a>
-    <form method="POST" action="/things/<%=thing.id%>?_method=DELETE">
-    <button class="card-footer clearfix small z-1" type="submit">Delete</button>
-    </a>
-    </form>
-    </div>
-    </div>
+                    </div>
+                </div>
+                <a href="<%="/things/"+thing._id%>" class="card-footer clearfix small z-1">
+                    <span class="float-left">View</span>
+                    <span class="float-right"><i class="fa fa-angle-right"></i></span>
+                </a>
+                <a href="<%="/things/"+thing._id+"/edit"%>" class="card-footer clearfix small z-1">
+                    <span class="float-left">Edit</span>
+                    <span class="float-right"><i class="fa fa-angle-right"></i></span>
+                </a>
+                <form method="POST" action="/things/<%=thing.id%>?_method=DELETE">
+                    <button class="card-footer clearfix small z-1" type="submit">Delete</button>
+                    </a>
+                </form>
+            </div>
+        </div>
 
-    <% }) %>
+        <% }) %>
 </div>

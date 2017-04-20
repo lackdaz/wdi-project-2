@@ -109,6 +109,10 @@ let thing = {
 
   update: (req, res) => {
     console.log(req.body)
+    if(!req.body.name || !req.body.userId){
+      req.flash('error', 'Missing some fields');
+      return res.redirect('/things/'+req.params.id+'/edit')
+    }
     Thing.findByIdAndUpdate(req.params.id, {
       name: req.body.name,
       userId: req.body.userId

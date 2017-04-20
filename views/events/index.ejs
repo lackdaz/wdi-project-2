@@ -1,0 +1,49 @@
+<!-- Example Tables Card -->
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fa fa-table"></i> Access Movement
+    </div>
+    <div class="card-block">
+        <div class="table-responsive">
+            <table class="table table-bordered" width="100%" id="dataTable" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>uid</th>
+                        <th>isEntry</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                      <th>#</th>
+                      <th>uid</th>
+                      <th>isEntry</th>
+                      <th>Time</th>
+                </tfoot>
+                <tbody>
+                <% events.forEach(function(event,index){ %>
+                    <tr>
+                      <td>
+                        <%- index+1 %>
+                      </td>
+                      <td>
+                        <%- event.uid %>
+                      </td>
+                      <td>
+                        <%- event.isEntry %>
+                      </td>
+                      <td>
+                        <%- event.time %>
+                      </td>
+                    </tr>
+                <% }) %>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer small text-muted">
+        Last updated <%= events.pop().time %>
+    </div>
+</div>

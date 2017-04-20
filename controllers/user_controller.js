@@ -3,10 +3,22 @@ var passport = require('../config/passport')
 
 
 let usersController = {
+
   index: (req, res) => {
     User.find({}, (err, data) => {
       if (err) throw err
       res.render('homepage', { data })
+    })
+  },
+
+  list: (req, res) => {
+    User.find({related: res.locals.currentUser._id},
+      (err,output) => {
+      if (err) next(err)
+      console.log(output)
+      res.render('users/', {
+        users: output
+      })
     })
   },
 
@@ -64,7 +76,7 @@ let usersController = {
         successRedirect: '/dashboard',
         failureRedirect: '/login',
         failureFlash: 'Invalid username and/or password',
-        successFlash: 'Hello'
+        successFlash: 'Welcome Back'
       })
       return signupStrategy(req, res)
   },
@@ -90,6 +102,7 @@ let usersController = {
       output.email = req.body.email
       output.password = req.body.password
       output.save((err, data) => {
+        req.flash('success', 'Updated Settings');
         res.redirect('/settings')
       })
   })
@@ -119,7 +132,7 @@ let usersController = {
     console.log('body is'+req.body)
     if(!req.body.name || !req.body.email || !req.body.cardUid){
       req.flash('error', 'Missing some fields');
-      res.redirect('/users/'+req.params.id+'/edit')
+      return res.redirect('/users/'+req.params.id+'/edit')
     }
     console.log('hello')
     User.findById(req.params.id,(err, output) => {
@@ -136,7 +149,7 @@ let usersController = {
   logout: (req, res) => {
     req.logout() // remove the session => req.user = undefined, req.isAuthenticated()= false
     req.flash('success','Successfully logged out')
-    res.redirect('/login')
+    res.render('/')
   }
 
 

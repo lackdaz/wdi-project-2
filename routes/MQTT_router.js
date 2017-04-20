@@ -3,11 +3,22 @@ const router = express.Router()
 const mqtt = require('../controllers/MQTT_controller')
 
 /* Authentication start here */
+router.route('/control')
+.get(mqtt.index)
+
 router.route('/open')
 .get(mqtt.open)
 
+router.route('/open/:id')
+.get(mqtt.openForX)
+
+router.route('/lock')
+.get(mqtt.lock)
+
 router.route('/listen/:id')
 .get(mqtt.listen)
+
+
 
 // router.route('/access')
 // .post(mqtt.accessPrivileges)
