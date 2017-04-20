@@ -66,14 +66,15 @@ router.route('/settings')
 router.route('/settings/:id')
 .put(userController.update)
 
-router.route('/users')
-.get(userController.list)
 
 router.route('/users/:id/edit')
 .get(userController.editChild)
 
 router.route('/users/:id/')
 .put(userController.updateChild)
+
+router.route('/users')
+.get(userController.list)
 
 router.route('/events')
 .get(eventController.list)

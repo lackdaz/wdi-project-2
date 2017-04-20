@@ -391,7 +391,7 @@ h1, h2, h3, h4, h5, h6 {font-weight:normal;margin:0 0 15px;}
 	5) contant Start
 ===========================*/
 
-#contant-1{background: #F2F9FE;padding: 80px 0px}
+#contant-1{background: #FFFFFF;padding: 80px 0px}
 .block-left{}
 .contant-1-text-area{padding-top: 80px}
 .contant-1-head:after{background: #949C9C;
@@ -402,7 +402,7 @@ width: 102px;}
 .contant-1-head h1{ font-size: 36px;font-family: 'Raleway', sans-serif; font-weight: 700;color: #5DCA88;}
 .contant-1-text{padding-top: 40px}
 .contant-1-text h2{color:#8C9494; font-size: 35px; font-family: 'Raleway', sans-serif; font-weight: 400; padding-bottom: 25px}
-.contant-1-text p{color:#ABB2B4; font-size: 16px; font-family: 'Raleway', sans-serif; font-weight: 400; margin:0px;}
+.contant-1-text p{color:#ABB2B4; font-size: 16px; font-family: 'Raleway', sans-serif; font-weight: 400; margin:0px; text-align: justify;}
 .edit-button-2{background: none; border: 3px solid #AAB2B5; border-radius: 30px; color: #636c6c;padding: 8px 50px;font-size: 21px;font-family: 'Raleway', sans-serif; font-weight: 700; margin-top: 50px}
 .edit-button-2:hover{background: none;border: 3px solid #AAB2B5; color: #636c6c;}
 #contant-1 .block-right{ text-align: center}
@@ -567,4 +567,4 @@ width: 42px;}
 
 .edit-tab-content{padding-top: 30px}
 .teb-icon-edit{ height: 170px;width: 170px; margin: 0 auto; color:#5DCA88;}
-.teb-icon-edit i{font-size: 170px}
+.teb-icon-edit i{font-size: 170px;}
