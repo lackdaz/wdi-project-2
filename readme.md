@@ -82,6 +82,7 @@ Some of the features from the project were not planned from the get-go, e.g. car
 * To achieve server-client authentication and use of websockets for event handling
 
 ## ERD
+![ScreenShot](https://github.com/lackdaz/wdi-project-2/blob/master/uploads/ERD.jpeg)
 
 
 ## Models, Routes, Controllers
@@ -110,7 +111,9 @@ Sentinel
 * There are definitely a lot of security issues - that I do not yet know how to fix yet, and I'm not too certain about how the application is robust enough to handle multiple access requests.
 
 #### Design
+![ScreenShot](https://github.com/lackdaz/wdi-project-2/blob/master/uploads/Design.jpeg)
 
+More wireframing and previous models/plans can be found: [here](https://github.com/lackdaz/wdi-project-2/tree/master/uploads)
 
 ### Future
 * User profiles! I kept the model for future development of saving 'user preferences' to achieve more 'ambient' forms of UX. Essentially, I predict that manual applications like RFID card-reading would be replaced by remote authentication - like beacons, chip implants, blockchain - so hopefully this runs along the same grain
