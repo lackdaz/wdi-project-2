@@ -17,7 +17,7 @@ var client = mqtt.connect('mqtt://m10.cloudmqtt.com', {
 let mqttController = {
 
   index: (req, res) => {
-    res.render('controls/', {})
+    res.render('controls/')
   },
 
   open: (req, res) => {
@@ -29,7 +29,7 @@ let mqttController = {
     // publish the message to open the door
     client.publish('onOff', '1', (err, output) => {
       req.flash('success', 'Door Unlocked!');
-      res.redirect('/mqtt/control', {})
+      res.redirect('/mqtt/control')
     })
   },
 
@@ -42,7 +42,7 @@ let mqttController = {
     // publish the message to open the door
     client.publish('openForX', req.params.id, (err, output) => {
       req.flash('error', 'We are still currently working on this feature');
-      res.redirect('', {})
+      res.render('504')
     })
   },
 
@@ -55,7 +55,7 @@ let mqttController = {
     // publish the message to open the door
     client.publish('onOff', '0', (err, output) => {
       req.flash('success', 'Door Locked!');
-      res.redirect('/mqtt/control', {})
+      res.redirect('/mqtt/control')
     })
   },
 
@@ -68,7 +68,7 @@ let mqttController = {
     // publish the message to open the door
     client.publish('bar', '1', (err, output) => {
       req.flash('success', 'Superlock Enabled!');
-      res.redirect('/mqtt/control', {})
+      res.redirect('/mqtt/control')
     })
   },
 

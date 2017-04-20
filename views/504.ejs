@@ -1,0 +1,11 @@
+<h1>We apologize, as this feature is still currently in development!</h1>
+<h2>
+<%if (!authenticated) { %>
+  <ul>
+    <li><a href="/signup">Sign up now</a></li>
+    <li><a href="/login">Admin Login</a></li>
+      <% } else {%>
+    <li><a href="/dashboard">Go back to Thingies</a></li>
+  </ul>
+  <% } %>
+</h2>

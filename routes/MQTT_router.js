@@ -15,6 +15,9 @@ router.route('/open/:id')
 router.route('/lock')
 .get(mqtt.lock)
 
+router.route('/superlock')
+.get(mqtt.superlock)
+
 router.route('/listen/:id')
 .get(mqtt.listen)
 

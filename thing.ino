@@ -1,7 +1,5 @@
 /*
-Adaoted code from Miguel Balboa's RFID
-
-Written in c++
+Many thanks to nikxha from the ESP8266 forum
 */
 
 #include <ESP8266WiFi.h>
@@ -23,9 +21,12 @@ GND     = GND
 #define RST_PIN  5  // RST-PIN für RC522 - RFID - SPI - Modul GPIO5
 #define SS_PIN  4  // SDA-PIN für RC522 - RFID - SPI - Modul GPIO4
 
-const char* ssid = "GA@Spacemob";
-const char* password = "yellowpencil";
+const char* ssid = "yourSSID";
+const char* password = "yourWifiPassword";
+
 const char* mqtt_server = "m10.cloudmqtt.com";
+const char* username = "yourCloudMqttUsername"
+const char* password = "yourCloudMqttPassword"
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -42,6 +43,8 @@ byte nuidPICC[4];
 
 void setup() {
   pinMode(BUILTIN_LED, OUTPUT);     // Initialize the BUILTIN_LED pin as an output
+  pinMode(D8, OUTPUT);     // Initialize the D8 as relay output
+  digitalWrite(BUILTIN_LED, HIGH);   // Turn the LED off
   Serial.begin(115200);
   setup_wifi();
   client.setServer(mqtt_server, 11719);
@@ -61,11 +64,16 @@ void loop() {
 
 if (!client.connected()) {
     reconnect();
+
   }
   client.loop();
 
+  // Open door if return message is read
+
+
   // Look for new cards
   if ( ! rfid.PICC_IsNewCardPresent())
+//  {};
     return;
 
   // Verify if the NUID has been readed
@@ -113,7 +121,7 @@ if (!client.connected()) {
     Serial.println(cardUid);
     char myString[10];
     client.publish("outTopic", itoa(cardUid, myString,10));
-
+//    delay(2000);
 
 
   }
@@ -182,11 +190,18 @@ void callback(char* topic, byte* payload, unsigned int length) {
   if ((char)payload[0] == '1') {
     Serial.println("on");
     digitalWrite(BUILTIN_LED, LOW);   // Turn the LED on (Note that LOW is the voltage level
+    digitalWrite(D8, HIGH);
     // but actually the LED is on; this is because
     // it is acive low on the ESP-01)
+    delay(5000);
+    digitalWrite(BUILTIN_LED, HIGH);   // Turn the LED off
+    digitalWrite(D8, LOW);
+
   } else {
     Serial.println("off");
     digitalWrite(BUILTIN_LED, HIGH);  // Turn the LED off by making the voltage HIGH
+    digitalWrite(D8, LOW);
+
   }
 
 }
@@ -196,7 +211,7 @@ void reconnect() {
   while (!client.connected()) {
     Serial.print("Attempting MQTT connection...");
     // Attempt to connect
-    if (client.connect("ESP8266Client", "oldvydio", "EjIAU6OfpIEn")) {
+    if (client.connect("ESP8266Client", username, password)) {
       Serial.println("connected");
       // Once connected, publish an announcement...
       client.publish("outTopic", "hello world");
