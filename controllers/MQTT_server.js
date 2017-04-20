@@ -55,6 +55,7 @@ client.on('message', function(topic, message) {
     newEvent.save(function(err, savedEntry) {
       if (err) throw console.error(err)
       console.log('saved new event!')
+      
     })
   })
 

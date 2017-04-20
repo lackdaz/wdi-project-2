@@ -58,8 +58,17 @@ router.route('/things/user')
 router.route('/things/user/new')
 .get(thingController.newUser)
 
+router.route('/settings')
+.get(userController.settings)
 
+router.route('/settings/:id')
+.put(userController.update)
 
+router.route('/users/:id/edit')
+.get(userController.editChild)
+
+router.route('/users/:id/')
+.put(userController.updateChild)
 
 function isLoggedIn (req, res, next) {
  if (req.isAuthenticated()) return next()

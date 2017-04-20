@@ -64,9 +64,73 @@ let usersController = {
         successRedirect: '/dashboard',
         failureRedirect: '/login',
         failureFlash: 'Invalid username and/or password',
-        successFlash: 'You have logged in'
+        successFlash: 'Hello'
       })
       return signupStrategy(req, res)
+  },
+
+  update: (req, res) => {
+    console.log('body is'+req.body)
+    if(!req.body.name || !req.body.email || !req.body.password || !req.body.password2){
+      req.flash('error', 'Missing some fields');
+      console.log('bad fields')
+      return res.redirect('/settings/')
+    }
+    if(req.body.password!==req.body.password2){
+      console.log(req.body.password)
+      console.log(req.body.password2)
+      req.flash('error', 'Passwords do not match');
+      console.log('bad password')
+      return res.redirect('/settings/')
+    }
+    console.log('hello')
+    User.findById(req.params.id,(err, output) => {
+      if (err) throw err
+      output.name = req.body.name
+      output.email = req.body.email
+      output.password = req.body.password
+      output.save((err, data) => {
+        res.redirect('/settings')
+      })
+  })
+  },
+
+  settings: (req, res) => {
+      User.findById(res.locals.currentUser, (err,output) => {
+        if (err) throw err
+        res.render('users/settings',{
+          users: output
+        })
+
+      })
+  },
+
+  editChild: (req, res) => {
+      User.findById(req.params.id, (err,output) => {
+        if (err) throw err
+        res.render('users/update',{
+          user: output
+        })
+
+      })
+  },
+
+  updateChild: (req, res) => {
+    console.log('body is'+req.body)
+    if(!req.body.name || !req.body.email || !req.body.cardUid){
+      req.flash('error', 'Missing some fields');
+      res.redirect('/users/'+req.params.id+'/edit')
+    }
+    console.log('hello')
+    User.findById(req.params.id,(err, output) => {
+      if (err) throw err
+      output.name = req.body.name
+      output.email = req.body.email
+      output.cardUid = req.body.cardUid
+      output.save((err, data) => {
+        res.redirect('/things')
+      })
+  })
   },
 
   logout: (req, res) => {

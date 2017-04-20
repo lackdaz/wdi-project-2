@@ -10,7 +10,7 @@
                 <p><strong>Users: </strong>
                   <ul>
                     <% thing.userId.forEach(function(output){ %>
-                      <li><%= output.name -%></li>
+                      <li> <a href=<%="/users/" + output._id + "/edit" %>><%= output.name -%></a></li>
                   <% }) %>
                 </ul>
                 </p>

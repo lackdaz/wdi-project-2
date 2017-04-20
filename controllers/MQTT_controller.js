@@ -18,6 +18,43 @@ let mqttController = {
 
   open: (req, res) => {
 
-}
+  },
+
+  listen: (req, res) => {
+    console.log('i am in the controller')
+    // Connect and keep listening to MQTT
+    // client.on('connect', function() {
+    //   console.log('Im here!')
+    //
+    //   // listen to outTopic channel
+    //   client.subscribe('outTopic')
+    //   console.log('connected to MQTT!')
+
+      // client.publish('outTopic', 'Hello mqtt')
+      client.on('message', function(topic, message) {
+        var uid = message.toString()
+        console.log('Got a message')
+
+        req.flash('success', 'Read card UID as: ' + uid);
+
+        console.log('Sent flash!')
+
+        User.findById(req.params.id, (err, output) => {
+          if (err) throw err
+          client.end()
+          console.log('Closed client!')
+
+          res.render('users/update', {
+            user: output,
+            uid: uid
+          })
+
+        })
+      // })
+    })
+    console.log('Waiting!')
+
+  },
+
 }
 module.exports = mqttController

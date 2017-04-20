@@ -3,14 +3,11 @@ let Product = require('../models/product')
 let productController = {
 
   list: (req, res) => {
-t      if (err) throw err
-      res.render('product/index', { products: output })
-    })
+
   },
 
   new: (req, res) => {
-    // res.send('new')
-    res.render('product/new')
+
   },
 
   create: (req, res) => {
