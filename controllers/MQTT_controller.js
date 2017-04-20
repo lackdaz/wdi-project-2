@@ -1,18 +1,12 @@
 // MQTT Initialize
 let Event = require('../models/event')
 let Thing = require('../models/thing')
+let User = require('../models/user')
+
 var mqtt = require('mqtt')
 require('dotenv').config({
   silent: true
 })
-
-var client = mqtt.connect('mqtt://m10.cloudmqtt.com', {
-  port: 11719,
-  username: process.env.MQTT_USERNAME,
-  password: process.env.MQTT_PASSWORD,
-  clientId: 'mqttjs_' + Math.random().toString(16).substr(2, 8)
-})
-
 
 let mqttController = {
 
@@ -23,38 +17,45 @@ let mqttController = {
   listen: (req, res) => {
     console.log('i am in the controller')
     // Connect and keep listening to MQTT
-    // client.on('connect', function() {
-    //   console.log('Im here!')
+
+    var client = mqtt.connect('mqtt://m10.cloudmqtt.com', {
+      port: 11719,
+      username: process.env.MQTT_USERNAME,
+      password: process.env.MQTT_PASSWORD,
+      clientId: 'mqttjs_' + Math.random().toString(16).substr(2, 8)
+    })
+
+    client.on('connect', function () {
+      console.log('Im here!')
+      client.subscribe('outTopic')
+        console.log('connected to right topic!')
+    })
     //
     //   // listen to outTopic channel
-    //   client.subscribe('outTopic')
-    //   console.log('connected to MQTT!')
 
       // client.publish('outTopic', 'Hello mqtt')
-      client.on('message', function(topic, message) {
-        var uid = message.toString()
-        console.log('Got a message')
+    client.on('message', function (topic, message) {
+      var uid = message.toString()
+      console.log('Got a message')
 
-        req.flash('success', 'Read card UID as: ' + uid);
+      req.flash('success', 'Read card UID as: ' + uid)
+      console.log(req.params.id)
 
-        console.log('Sent flash!')
+      User.findById(req.params.id, (err, output) => {
+        if (err) throw err
+        client.end()
+        console.log('Closed client!')
+        console.log(output)
+        output.Uid = uid
 
-        User.findById(req.params.id, (err, output) => {
-          if (err) throw err
-          client.end()
-          console.log('Closed client!')
-
-          res.render('users/update', {
-            user: output,
-            uid: uid
-          })
-
+        res.render('users/update', {
+          user: output,
         })
+      })
       // })
     })
     console.log('Waiting!')
-
-  },
+  }
 
 }
 module.exports = mqttController

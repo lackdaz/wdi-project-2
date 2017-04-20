@@ -12,8 +12,8 @@
 
     <div class="form-group">
         <label for="cardUid">cardUid</label>
-        <a input id="cardUid" class="form-control" type="text" name="cardUid" value="<%= user.cardUid %>"></a>
-        <a href="/mqtt/listen">Listen for card UID</a>
+        <input id="cardUid" class="form-control" type="text" name="cardUid" value="<%= user.Uid %>">
+        <a href="/mqtt/listen/<%= user._id%>">Listen for card UID</a>
     </div>
     <input class="btn btn-primary" type="submit">
 </form>

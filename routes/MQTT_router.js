@@ -6,7 +6,7 @@ const mqtt = require('../controllers/MQTT_controller')
 router.route('/open')
 .get(mqtt.open)
 
-router.route('/listen')
+router.route('/listen/:id')
 .get(mqtt.listen)
 
 // router.route('/access')
