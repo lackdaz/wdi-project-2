@@ -18,6 +18,8 @@ router.route('/lock')
 router.route('/listen/:id')
 .get(mqtt.listen)
 
+router.route('/listen')
+.get(mqtt.listenNoUser)
 
 
 // router.route('/access')

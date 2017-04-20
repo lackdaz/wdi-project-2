@@ -80,7 +80,8 @@ let thing = {
 
   // this is a post request
     newUser: (req, res) => {
-          res.render('things/newUser', {
+      var uid
+          res.render('things/newUser', { uid
         })
 
     },
