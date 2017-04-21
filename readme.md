@@ -90,39 +90,23 @@ Some of the features from the project were not planned from the get-go, e.g. car
 Sentinel
 ![Thingies Sentinel] (photo link here "Sentinel")
 
-| MQTT Controller |
-| ------: |
-| index: |
-| open: |
-| openForX: |
-| lock: |
-| superlock: |
-| listen: |
-| listenNoUser: |
-
-| User Controller |
-| -----: |
-| index: |
-| list: |
-| new: |
-| login: |
-| create: |
-| dashboard: |
-| update: |
-| settings: |
-| editChild: |
-| updateChild: |
-| logout: |
-
-| Event Controller |
-| ------: |
-| list: |
-| new: |
-| create: |
-| show: |
-| edit: |
-| update: |
-| delete: |
+| mqttController | eventController | thingController | userController |
+| ------ |:------:| ------:| ------: |
+| index: | -- | -- | index: |
+| open: | list: | list: | list: |
+| open: | new: | new: | new: |
+| openForX: | -- | -- | login: |
+| lock: | create: | create: | create: |
+| superlock: | -- | -- | dashboard: |
+| listen: | show: | show: | -- |
+| listenNoUser | edit: | edit: | -- |
+| -- | -- | createUser: | -- |
+| -- | update: | update: | update: |
+| -- | delete: | delete: | -- |
+| -- | -- | -- | settings: |
+| -- | -- | -- | editChild: |
+| -- | -- | -- | updateChild: |
+| -- | -- | -- | logout: |
 
 #### Models
 | Model #1: User       | Model #2: Thing | Model #3: Event |
