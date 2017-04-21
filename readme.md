@@ -94,12 +94,12 @@ Sentinel
 | ------ |:------:| ------:| ------: |
 | index: | -- | -- | index: |
 | open: | list: | list: | list: |
-| open: | new: | new: | new: |
-| openForX: | -- | -- | login: |
-| lock: | create: | create: | create: |
-| superlock: | -- | -- | dashboard: |
-| listen: | show: | show: | -- |
-| listenNoUser | edit: | edit: | -- |
+| openForX: | new: | new: | new: |
+| lock: | -- | -- | login: |
+| superlock: | create: | create: | create: |
+| listen: | -- | -- | dashboard: |
+| listenNoUser: | show: | show: | -- |
+| -- | edit: | edit: | -- |
 | -- | -- | createUser: | -- |
 | -- | update: | update: | update: |
 | -- | delete: | delete: | -- |
