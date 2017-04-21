@@ -1,5 +1,4 @@
 # Thingies
-======
 Where RFID Access Control meets the Internet-of-Things
 [Explore the possibilities](https://thingies.herokuapp.com/)
 
@@ -88,6 +87,40 @@ Some of the features from the project were not planned from the get-go, e.g. car
 ## Models, Routes, Controllers
 Sentinel
 ![Thingies Sentinel] (photo link here "Sentinel")
+
+| MQTT Controller |
+| ------: |
+| index: |
+| open: |
+| openForX: |
+| lock: |
+| superlock: |
+| listen: |
+| listenNoUser: |
+
+| User Controller |
+| -----: |
+| index: |
+| list: |
+| new: |
+| login: |
+| create: |
+| dashboard: |
+| update: |
+| settings: |
+| editChild: |
+| updateChild: |
+| logout: |
+
+| Event Controller |
+| ------: |
+| list: |
+| new: |
+| create: |
+| show: |
+| edit: |
+| update: |
+| delete: |
 
 #### Models
 | Model #1: User       | Model #2: Thing | Model #3: Event |

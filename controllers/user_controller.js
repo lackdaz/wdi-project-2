@@ -149,7 +149,7 @@ let usersController = {
   logout: (req, res) => {
     req.logout() // remove the session => req.user = undefined, req.isAuthenticated()= false
     req.flash('success','Successfully logged out')
-    res.render('/')
+    res.redirect('/')
   }
 
 
