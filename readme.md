@@ -14,7 +14,10 @@ The debut prototype, *Sentinel*, offers a glimpse into the potential of ***Thing
 ## Getting Started
 If you are new to electronics, I would recommend [WiFi-RFID-Reader](http://www.instructables.com/id/WiFi-RFID-Reader/).
 ### Prerequisites
-1. Wemos D1 mini ()
+1. Wemos D1 mini
+2. MFRC 422
+
+https://customer.cloudmqtt.com/customer/
 
 ### Installing
 You have to install the Arduino IDE 1.6.4. or 1.6.5.
