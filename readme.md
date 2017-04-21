@@ -125,9 +125,12 @@ Sentinel
 ### Obstacles
 * Understanding websockets! Enigmatic but fascinating stuff!
 * Deploying a user-study in a full-stack application within a week - I 'pivoted' my ideas 3 times
+* Server-end: big problems on assigning topics without hosting the websocket
+* Device-end: without the ability to update and compile the code remotely, it was difficult to implement any purposeful and flexible multi-device applications - one solution is to embed the different functions into topic messages themselves, or the use of cloud-based compilers like Particle.io or AWS. I've also read that new npm mqtt server routers have recently popped up but I didn't have the time to try these out - do let me know if you have any experience!
 
 ### Points of Interest
 * The helper function to extract the cardUid
+* Sending messages as an array of characters!
 
 #### Performance
 * There are definitely a lot of security issues - that I do not yet know how to fix yet, and I'm not too certain about how the application is robust enough to handle multiple access requests.
@@ -141,6 +144,7 @@ More wireframing and previous models/plans can be found: [here](https://github.c
 * User profiles! I kept the model for future development of saving 'user preferences' to achieve more 'ambient' forms of UX. Essentially, I predict that manual applications like RFID card-reading would be replaced by remote authentication - like beacons, chip implants, blockchain - so hopefully this runs along the same grain
 * Smart lights are the natural next step, the original intention of the project was to achieve [this](http://adityatannu.com/blog/post/2016/01/24/ESP8266-Websockets-demo-using-NeoPixels.html), but with more user-friendly documentation
 * This requires better encryption, more security features to be ever considered for public-access use. As of writing, I cannot guarantee the safety of any personal data
+
 ------
 
 ## Credit
